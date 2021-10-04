@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="jquery.mobile-1.4.3/jquery-ui.css">
+    <link rel="stylesheet" href="jquery.mobile-1.4.3/jquery.mobile-1.4.3.min.css">
+
+
+    <script src="jquery.mobile-1.4.3/jquery.js"></script>
+    <script src="jquery.mobile-1.4.3/jquery-ui.js"></script>
+    <script src="jquery.mobile-1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <script src="js/custom/PrimeGenerator.js"></script>
+    <script src="js/custom/SquareBoard.js"></script>
+    <script src="js/custom/SquareConfiguration.js"></script>
+    <script src="js/custom/SquareGoal.js"></script>
+    <script src="js/custom/UserPanel.js"></script>
+    <script src="js/custom/SquareNumber.js"></script>
+    <script src="js/custom/SquareGame.js"></script>
+    <script src="jquery.mobile-1.4.3/jquery.bigtext.js"></script>
+
+    <style type="text/css">
+
+
+        .selected {
+            border-top-color: #28597a !important;
+            background: #28597a !important;
+            color: #ccc !important;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+
+        }
+
+        .mainNav {
+            float: left;
+            transform: perspective(500px);
+            transform-style: preserve-3d;
+        }
+
+        .mainNav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mainNav li {
+            padding-top: 5px;
+        }
+
+        .gameMenu {
+            padding-left: 5px;
+            padding-right: 5px;
+            background-color: #ffffff;
+            overflow: hidden !important;
+
+        }
+
+        .mainMenu {
+            padding-left: 5px;
+            padding-right: 5px;
+
+            padding-top: 20px;
+
+        }
+
+        #cellgoal {
+            color: #000000;
+            font-weight: bolder;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            border-color: #ffffff;
+            background: #ffffff;
+            box-shadow: none;
+            cursor: default;
+
+        }
+
+        .cell {
+            cursor: pointer;
+
+            border-top: 1px solid #96d1f8;
+            background: #65a9d7;
+            background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+            background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+            background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+            background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+            background: -o-linear-gradient(top, #3e779d, #65a9d7);
+            -webkit-border-radius: 129px;
+            -moz-border-radius: 129px;
+            border-radius: 129px;
+            -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+            -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+            box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+            text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+            color: white;
+
+            font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+            text-decoration: none;
+            vertical-align: middle;
+
+            display: table-cell;
+            text-overflow: clip;
+            text-align: center;
+
+        }
+
+        .headline {
+            text-align: center;
+            vertical-align: middle;
+
+            padding-bottom: 10px;
+            width: 90%;
+            margin: 0 auto;
+            background-color: orange;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+
+        }
+
+        .spacer_row {
+            clear: both;
+            padding: 5px;
+
+        }
+
+        .spacer {
+            padding: 5px;
+        }
+
+        .row {
+
+            display: table;
+        }
+
+        .baseClass {
+            cursor: default;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #ffffff;
+        }
+
+        .header_inner {
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+            padding-top: 5px;
+
+            background-color: orange;
+        }
+
+        #header_inner_c {
+            font-weight: bolder;
+        }
+
+        .gme {
+            padding: 10px;
+            border-color: black;
+            border-width: 0;
+            border-style: double;
+
+            -webkit-border-radius: 29px;
+            -moz-border-radius: 29px;
+            border-radius: 29px;
+            background-color: lightblue;
+
+        }
+
+
+        .content {
+            overflow: hidden;
+            padding-top: 20px;
+            width: 90%;
+            margin: 20px auto;
+            text-align: center;
+            background-color: lightblue;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+        }
+
+        #loadingScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            margin-top: -250px; /* Half the height */
+            margin-left: -250px; /* Half the width */
+
+        }
+
+    </style>
+
+
+</head>
+<body class="baseClass">
+
+
+<div style="width: 100%; display: none" id="mainMenu" class="mainMenu">
+
+    <div class="headline">
+        MathSquare&nbsp;Plus
+    </div>
+
+    <div class="content">
+        <div style=" display: inline-block; width: 100%">
+            <div id="content1" class="fititInThere" style="text-align: center; width: 100%">Your current level is</div>
+            <div id="content2" class="fititinthere" style=" text-align: center; width: 100%"></div>
+
+
+            <a data-role="button" id="mainMenu_play" href="#">Start Game</a>
+
+            <div id="lower">
+                <a data-role="button" id="mainMenu_help" href="#">Help</a>
+                &nbsp;
+                <a data-role="button" style="color: #ff0000" id="mainMenu_reset" href="#">Reset Game</a>
+
+                <div id="mainMenu_reset_confirm" style="display: none; width: 100% ">
+
+                    <a data-role="button" style="color: #000000;  float: left; width: 30%" id="mainMenu_reset_no" href="#">NO!</a>
+
+
+                    <a data-role="button" style="color: #ff0000;  float: right; width: 30%;" id="mainMenu_reset_yes" href="#">YES!</a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+    <img  id="loadingScreen" src="img/ajax-loader.gif" />
+
+<div style="display: none; width: 100%" id="loseMenu" class="mainMenu">
+
+    <div class="headline">
+        MathSquare&nbsp;Plus
+    </div>
+
+    <div class="content">
+        <div id="losecontent1">You missed it!</div>
+        <div id="losecontent2">Better luck next time :-)</div>
+
+        <a data-role="button" id="loseMenu_restart" href="#">Try again!</a>
+        <a data-role="button" id="loseMenu_mainMenu" href="#">Main Menu</a>
+    </div>
+
+
+</div>
+
+
+<div style="display: none; width: 100%" id="winMenu" class="mainMenu">
+
+    <div class="headline">
+        MathSquare&nbsp;Plus
+    </div>
+
+    <div class="content">
+        <div id="wincontent1">Good work!</div>
+        <div id="wincontent2">Your current level is</div>
+
+        <div id="nextLevelIs"></div>
+
+
+        <a data-role="button" id="winMenu_play" href="#">Play level!</a>
+        <a data-role="button" id="winMenu_mainMenu" href="#">Main Menu</a>
+    </div>
+
+</div>
+
+
+<div style="display: none; width: 100%" id="pauseMenu" class="mainMenu">
+
+    <div class="headline">
+        MathSquare&nbsp;Plus
+    </div>
+
+    <div class="content">
+        <a data-role="button" id="pauseMenu_continue" href="#">Continue</a>
+        <div style="font-weight: bolder" id="timeLeft"></div>
+        <div style="font-weight: bolder" id="timeLeft_des">Time left</div>
+
+        <div style="font-weight: bolder" id="triesLeft"></div>
+        <div style="font-weight: bolder" id="triesLeft_des">Tries left</div>
+
+        <div style="font-weight: bolder" id="numbersLeft"></div>
+        <div style="font-weight: bolder" id="numbersLeft_des">Numbers left</div>
+
+        <a data-role="button" id="pauseMenu_restart" href="#">Restart</a>
+        <a data-role="button" id="pauseMenu_mainMenu" href="#">Main Menu</a>
+    </div>
+
+
+</div>
+
+
+<div style="display: none; width: 100%" id="helpMenu" class="mainMenu">
+    <div class="headline">
+        MathSquare&nbsp;Plus
+    </div>
+
+    <div class="content">
+        <p id="helpContent" style="width:100%">
+        You have to solve a square of prime numbers.<br/>
+        In the center of the square is the sum of two random prime numbers<br/>
+        Tap the numbers which sum up to this to remove them from the square<br/>
+        The current level is won if you clear the square in time<br/>
+        <br/>
+        If you wish you may reset your current level in the Main Menu (This can't be undone)
+        </p>
+        <a data-role="button" id="helpMenu_mainMenu" href="#">Main Menu</a>
+    </div>
+
+
+</div>
+
+
+<div id="gameMenu" style="display: none;" class="gameMenu">
+
+
+    <div class="header" style="width: 100%">
+        <div id="header_inner_l" class="header_inner" style="float: left; ">
+            <div class="header_desc">
+                Tries:
+            </div>
+            <div id="header_inner_tries" style="vertical-align: bottom" class="header_val">
+                --
+            </div>
+        </div>
+        <div id="header_inner_c" style="position: absolute;">
+            ||
+        </div>
+
+        <div id="header_inner_r" class="header_inner" style="float: right;">
+
+            <div class="header_desc">
+                Time:
+            </div>
+            <div id="header_inner_time" class="header_val">
+                ----
+            </div>
+        </div>
+
+
+        <div style="clear: both"></div>
+
+
+    </div>
+
+    <div id="gme" class="gme">
+        <div class="row">
+            <div class="cell" id="cell1"></div>
+            <div class="spacer"></div>
+            <div class="cell" id="cell2"></div>
+            <div class="spacer"></div>
+            <div class="cell" id="cell3"></div>
+            <div class="spacer"></div>
+            <div class="cell" id="cell4"></div>
+            <div class="spacer"></div>
+            <div class="cell" id="cell5"></div>
+        </div>
+        <div class="spacer_row"></div>
+        <div class="row">
+            <div class="cell" id="cell6"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell7"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell8"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell9"></div>
+            <div class="spacer"></div>
+            <div class="cell" id="cell10"></div>
+        </div>
+        <div class="spacer_row"></div>
+
+        <div class="row">
+            <div class="cell" id="cell11"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell12"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cellgoal">Goal to reach</div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell14"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell15"></div>
+        </div>
+        <div class="spacer_row"></div>
+
+
+        <div class="row">
+            <div class="cell" id="cell16"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell17"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell18">></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell19"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell20"></div>
+        </div>
+        <div class="spacer_row"></div>
+
+
+        <div class="row">
+            <div class="cell" id="cell21">></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell22"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell23"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell13"></div>
+            <div class="spacer"></div>
+
+            <div class="cell" id="cell0"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script src="js/custom/game.js"></script>
+<script src="js/min.js"></script>
+
+</body>
+</html>
